@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Sections
+import PersonalProjects from "./sections/PersonalProjects";
+import WorkExperience from "./sections/WorkExperience";
+import AboutMe from "./sections/AboutMe";
+
+// Styling
+import styled from "styled-components";
+
+const SectionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh;
+`;
+
+const Button = styled.button`
+  display: flex;
+`;
+
+enum Section {
+  AboutMe,
+  PersonalProjects,
+  WorkExperience,
 }
+
+const App = () => {
+  const [section, setSection] = useState(Section.AboutMe);
+
+  return (
+    <>
+      <SectionWrapper>
+        {section === Section.AboutMe && <AboutMe />}
+        {section === Section.PersonalProjects && <PersonalProjects />}
+        {section === Section.WorkExperience && <WorkExperience />}
+      </SectionWrapper>
+      <Button
+        onClick={() => {
+          setSection(Section.PersonalProjects);
+        }}
+      >
+        Videre
+      </Button>
+      <Button
+        onClick={() => {
+          setSection(Section.WorkExperience);
+        }}
+      >
+        Forrige
+      </Button>
+    </>
+  );
+};
 
 export default App;
